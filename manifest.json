@@ -1,0 +1,12 @@
+{    
+	"name": "Productive Youtube Extension",
+	"version": "1.0",
+	"description": "Make sure no extra links pop up in youtube so you don't get distracted from what you're currently watching.",
+	"manifest_version": 2,
+	"content_scripts": [
+		{
+			"matches": ["https://www.youtube.com/*"],
+			"js": ["content.js"]
+		}
+	]
+}
