@@ -1,18 +1,16 @@
 // Use a console log to test if script it running
 // console.log("Chrome extension go2");
+var tabURL = window.location.href;
 
-// Define variable as the element i want to remove then go to its parent
-// and remove it. 
+console.log(tabURL);
 
-var app_drawer = document.getElementsByTagName('ytd-rich-grid-renderer');
+// Check url. Define variable as the element i want to remove
+// then use set its style to invisable
 
-app_drawer[0].style.visibility = 'hidden';
-
-//need to figure out how to run js on specific pages so i can 
-//run the following on youtube.com/watch*
-//Matches currently set: "matches": ["https://www.youtube.com/*"],
-
-
-// var comment_section = document.getElementById('secondary');
-
-// comment_section.style.visibility = 'hidden';
+if (tabURL == 'https://www.youtube.com/') {
+	var app_drawer = document.getElementsByTagName('ytd-rich-grid-renderer');
+	app_drawer[0].style.visibility = 'hidden';
+} else if (tabURL.startsWith('https://www.youtube.com/watch')){
+	var comment_section = document.getElementsByTagName('ytd-watch-next-secondary-results-renderer');
+	comment_section[0].style.visibility = 'hidden';
+}
