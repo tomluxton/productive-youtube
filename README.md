@@ -8,7 +8,7 @@ Make sure to have Google chrome installed on your computer. Go to chrome://exten
 
 ### Installing
 
-Pull the files of this github (except this read me). Click load unpacked in the extensions tab and upload the files. This should get the extension running on your Chrome.
+Pull the files of this github. Click load unpacked in the extensions tab and upload the files. This should get the extension running on your Chrome.
 
 ## Authors
 
