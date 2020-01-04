@@ -1,27 +1,46 @@
-// Use a console log to test if script it running
-// console.log("Chrome extension go2");
-var tabURL = window.location.href;
+// Updated on changed
+chrome.runtime.onMessage.addListener(function(req, sender, sendResponse) {
+    updateThumbnail( req.action );
+});
 
-console.log(tabURL);
+// Check 'display' option onload
+chrome.storage.sync.get(['display'], function(result) {
+    updateThumbnail( result.display );
+});
 
-// Check url. Define variable as the element i want to remove
-// then use set its style to invisable
-	var tabURL = window.location.href;
-	function disable_suggested() {
-		if (tabURL == 'https://www.youtube.com/') {
-			var app_drawer = document.getElementsByTagName('ytd-two-column-browse-results-renderer');
-			// app_drawer[0].style.visibility = 'hidden';
-			for (i = 0; i < app_drawer.length; i++) {
-				app_drawer[i].style.visibility = 'hidden';
-			}
-		} else if (tabURL.startsWith('https://www.youtube.com/watch')){
-			var related_section = document.getElementById('related');
-			for (i = 0; i < related_section.length; i++) {
-				related_section[i].style.visibility = 'hidden';
-			}
-			// comment_section[0].style.visibility = 'hidden';
-		}
-	}
+// On user scroll and loads more
+document.getElementById('contents').addEventListener('DOMSubtreeModified', function(){
+    chrome.storage.sync.get(['display'], function(result) {
+        updateThumbnail( result.display );
+    });
+});
 
-	disable_suggested();
+document.getElementById('items').addEventListener('DOMSubtreeModified', function(){
+    chrome.storage.sync.get(['display'], function(result) {
+        updateThumbnail( result.display );
+    });
+});
 
+function updateThumbnail( action ) {
+
+    if (document.URL == 'https://www.youtube.com/') {
+
+        let thumbs  =   document.getElementsByTagName('ytd-rich-grid-renderer');
+
+        for ( var i = 0; i < thumbs.length; i++ ) {
+            thumbs[i].style.display =   !action ? "none": "block";
+        }
+    } else if (document.URL.startsWith('https://www.youtube.com/watch')) {
+        let thumbs  =   document.getElementsByTagName('ytd-watch-next-secondary-results-renderer');
+
+        for ( var i = 0; i < thumbs.length; i++ ) {
+            thumbs[i].style.display =   !action ? "none": "block";
+        }
+
+        let comments  =   document.getElementsByTagName('ytd-comments');
+
+        for ( var i = 0; i < comments.length; i++ ) {
+            comments[i].style.display =   !action ? "none": "block";
+        }
+    }
+}

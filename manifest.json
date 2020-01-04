@@ -1,37 +1,29 @@
-{    
-	"name": "Productive Youtube Extension",
-	"version": "1.0",
-	"description": "Make sure no extra links pop up in youtube so you don't get distracted from what you're currently watching.",
-	"permissions": [
+{
+    "name": "Productive Youtube Extension",
+    "version": "1.0",
+    "description": "Make sure no extra links pop up in youtube so you don't get distracted from what you're currently watching.",
+    "permissions": [
         "tabs",
         "storage",
         "declarativeContent",
         "activeTab"
     ],
-	"manifest_version": 2,
-	"content_scripts": [
-		{
-			"matches": ["https://www.youtube.com/*"],
-			"js": ["content.js"],
-        	"run_at": "document_end"
-		}
-	],
-	"background": {
-		"scripts": ["background.js"]
-	},
-	"browser_action": {
-    	"default_icon": {
-      		"19": "images/icon19.png",
-      		"38": "images/icon38.png"
-    	},
-    	"default_popup": "popup.html"
-  	},
-  	"icons": { 
-  		"16": "images/icon16.png",
-    	"48": "images/icon48.png",
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "content_scripts": [{
+        "matches": ["https://www.youtube.com/*"],
+        "js": ["content.js"],
+        "run_at": "document_end"
+    }],
+    "page_action": {
+        "default_popup": "popup.html"
+    },
+    "icons": { 
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
         "128": "images/icon128.png" 
     },
-    "permissions": [
-    	"tabs"
-	]
+    "manifest_version": 2
 }
